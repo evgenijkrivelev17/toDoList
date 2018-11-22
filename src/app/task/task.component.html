@@ -1,0 +1,12 @@
+<div class="list-group-item list-group-item-action flex-column align-items-center  ">
+  <div class="d-flex justify-content-between align-items-center">
+    <h5 class="mb-1">{{Task.Task}}</h5>
+    <small class=".col-md-4 .ml-auto">{{Task.TimeDone | date:'dd.MM.yyyy'}}</small>
+  </div>
+  <p class="mb-1"></p>
+  <div>{{Task.Description}}</div>
+  <div class="d-flex flex-row-reverse">
+    <button type="button" class="btn btn-primary btn-s mp-2" (click)="onRemove(Task)">x</button>
+  </div>
+  <div class="d-flex flex-row-reverse">{{ getStatus()}}</div>
+</div>

@@ -1,0 +1,15 @@
+<div class="col-md-5 align-center">
+  <label for="basic-url">Создание задачи</label>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" aria-describedby="basic-addon3" [(ngModel)]="currentTask.Task" placeholder="имя задачи">
+  </div>
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" aria-describedby="basic-addon3" [(ngModel)]="currentTask.Description"
+      placeholder="Описание">
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" [(ngModel)]="currentTask.IsDone">
+    <label class="form-check-label">Задача выполнена</label>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="saveTask()">Создать</button>
+</div>
