@@ -1,10 +1,13 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser')
+var Promise = require('bluebird');
 var app = express();
 app.set("PORT", process.env.PORT || 4000);
 app.set("URL", "localhost");
 
+Promise.promisifyAll(mongoose);
+mongoose.Promise = Promise;
 
 mongoose.createConnection('mongodb://localhost:27017/testproject', { useNewUrlParser: true }).then((v) => {
     console.log(`Mongo db is working`);
@@ -37,8 +40,6 @@ app.use((err, req, res) => {
 });
 
 
-app.listen(app.get('PORT'), app.get('URL'), () => {
-    console.log(`Server is working on ${app.get("URL")}:${app.get("PORT")}`);
-}, (error) => {
-    console.log(error);
+app.listen(app.get('PORT'), 'localhost', function () {
+    console.log(`Server is wroking`);
 });

@@ -1,9 +1,9 @@
 var router = require('express').Router();
 var Task = require('../models/task').model;
-
+var TaskService = require('../services/taskSerrvice').TaskService;
 
 router.get('/all', (req, res) => {
-    Task.find({}).then((resolve) => {
+    TaskService.getAllTasks().then((resolve) => {
         res.jsonp(200, resolve);
     }).catch((error) => {
         res.jsonp(500, { Error: `${error}` });
@@ -13,7 +13,7 @@ router.get('/all', (req, res) => {
 router.delete('/delete', (req, res) => {
     let Id = req.body.params.Id;
     if (Id != null) {
-        Task.findByIdAndRemove(Id).then((_task) => {
+        TaskService.removeId(Id).then((_task) => {
             res.jsonp(200, _task);
         }).catch((error) => {
             res.jsonp(500, { name: `Some errors`, data: error });
@@ -23,11 +23,7 @@ router.delete('/delete', (req, res) => {
 
 router.post('/update', (req, res) => {
     let updateTask = req.body;
-    Task.findByIdAndUpdate(updateTask.Id, {
-        Task: updateTask.Task,
-        Description: updateTask.Description,
-        IsDone: updateTask.IsDone,
-    }).then((resolve) => {
+    TaskService.update(updateTask).then((resolve) => {
         res.jsonp(200, resolve);
     }).catch((error) => {
         res.jsonp(500, { name: `Some error`, data: error });
@@ -36,12 +32,7 @@ router.post('/update', (req, res) => {
 
 router.post('/add', (req, res) => {
     let reqBody = req.body;
-    let newTask = new Task({
-        Task: reqBody.Task,
-        Description: reqBody.Description,
-        IsDone: reqBody.IsDone
-    });
-    newTask.save().then((result) => {
+    TaskService.add(reqBody).then((result) => {
         if (result != null)
             res.jsonp(200, result);
     }, (error) => {
