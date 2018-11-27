@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { TasksServiceService } from '../tasks-service.service';
 import { Task } from '../task';
 import { getLocaleDateTimeFormat } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail-task',
@@ -12,7 +13,7 @@ export class DetailTaskComponent implements OnInit {
 
   @Input() currentTask: Task = new Task();
 
-  constructor(private TaskService: TasksServiceService) {
+  constructor(private TaskService: TasksServiceService, private router: Router) {
   }
 
   ngOnInit() {
@@ -22,9 +23,10 @@ export class DetailTaskComponent implements OnInit {
     this.currentTask.TimeDone = new Date();
     this.TaskService.AddTask(this.currentTask);
     this.ClearValue();
+    this.GoBack();
   }
   public GoBack() {
-
+    this.router.navigate(['']);
   }
 
   public ClearValue() {

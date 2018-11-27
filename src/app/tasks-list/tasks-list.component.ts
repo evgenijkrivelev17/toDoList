@@ -19,11 +19,12 @@ export class TasksListComponent implements OnInit {
 
   }
 
-  ngOnInit() {
-    this.Tasks = this.TasksService.getTasks();
+  async ngOnInit() {
+    await this.TasksService.getTasks();
+    this.Tasks = this.TasksService.Tasks;
   }
 
-  private onRemove(task: Task) {
+  private async onRemove(task: Task) {
     let result = this.TasksService.DeleteTask(task);
   }
 

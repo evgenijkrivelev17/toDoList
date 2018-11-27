@@ -9,8 +9,8 @@ function taskService() {
             IsDone: _task.IsDone
         });
         return new Promise((resolve, reject) => {
-            newTask.save().then((result) => {
-                return resolve(result);
+            newTask.save().then((e) => {
+                return resolve(e);
             }).catch((error) => {
                 return reject(error);
             });
@@ -49,8 +49,9 @@ function taskService() {
             Model.find({}).then((doc) => {
                 if (doc.length == 0)
                     return reject(doc);
-                else
+                else {
                     return resolve(doc);
+                }
             }).catch((error) => {
                 return reject(error);
             });

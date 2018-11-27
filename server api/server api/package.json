@@ -1,0 +1,20 @@
+{
+  "name": "redux-ru-tutorial",
+  "version": "1.0.0",
+  "description": "Redux RU tutorial",
+  "main": "sever.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node server.js"
+  },
+  "author": "Evgenij Krivelev",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.3.13",
+    "nconf": "^0.10.0"
+  }
+}

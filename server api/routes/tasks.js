@@ -3,7 +3,7 @@ let TaskService = require('../services/taskSerrvice').TaskService;
 
 router.get('/all', (req, res) => {
     TaskService.getAllTasks().then((resolve) => {
-        res.jsonp(200, resolve);
+        res.status(200).send(resolve);
     }).catch((error) => {
         res.jsonp(500, { Error: `${error}` });
     });
