@@ -1,6 +1,5 @@
-var router = require('express').Router();
-var Task = require('../models/task').model;
-var TaskService = require('../services/taskSerrvice').TaskService;
+let router = require('express').Router();
+let TaskService = require('../services/taskSerrvice').TaskService;
 
 router.get('/all', (req, res) => {
     TaskService.getAllTasks().then((resolve) => {
@@ -11,9 +10,9 @@ router.get('/all', (req, res) => {
 });
 
 router.delete('/delete', (req, res) => {
-    let Id = req.body.params.Id;
-    if (Id != null) {
-        TaskService.removeId(Id).then((_task) => {
+    let task = req.body;
+    if (task != null) {
+        TaskService.removeId(task).then((_task) => {
             res.jsonp(200, _task);
         }).catch((error) => {
             res.jsonp(500, { name: `Some errors`, data: error });
@@ -35,7 +34,7 @@ router.post('/add', (req, res) => {
     TaskService.add(reqBody).then((result) => {
         if (result != null)
             res.jsonp(200, result);
-    }, (error) => {
+    }).catch((error) => {
         res.jsonp(500, error);
     });
 });

@@ -1,17 +1,17 @@
-var Task = require('../models/task').model;
+let Model = require('../models/task').model;
 
 function taskService() {
 
     function addTask(_task) {
-        let _newTask = new Task({
+        var newTask = new Model({
             Task: _task.Task,
             Description: _task.Description,
             IsDone: _task.IsDone
         });
         return new Promise((resolve, reject) => {
-            _newTask.save().then((newTask) => {
-                return resolve(newTask);
-            }).cath((error) => {
+            newTask.save().then((result) => {
+                return resolve(result);
+            }).catch((error) => {
                 return reject(error);
             });
         });
@@ -20,17 +20,22 @@ function taskService() {
 
     function updateTask(_task) {
         return new Promise((resolve, reject) => {
-            Task.findByIdAndUpdate(_task.Id, { _task }).then((result) => {
-                return resolve(result);
-            }).cath((error) => {
-                return reject(error);
-            });
+            Model.findByIdAndUpdate(_task._id,
+                {
+                    Task: _task.Task,
+                    Description: _task.Description,
+                    IsDone: _task.IsDone
+                }, { new: true }).then((result) => {
+                    return resolve(result);
+                }).catch((error) => {
+                    return reject(error);
+                });
         });
     }
 
     function deleteTask(_task) {
         return new Promise((resolve, reject) => {
-            Task.findByIdAndDelete(_task.Id).then((document) => {
+            Model.findByIdAndDelete(_task.Id).then((document) => {
                 if (document != null)
                     return resolve(document);
             }).catch((error) => {
@@ -41,12 +46,12 @@ function taskService() {
 
     function getAllTasks() {
         return new Promise((resolve, reject) => {
-            Task.find({}).then((doc) => {
+            Model.find({}).then((doc) => {
                 if (doc.length == 0)
                     return reject(doc);
                 else
                     return resolve(doc);
-            }).cath((error) => {
+            }).catch((error) => {
                 return reject(error);
             });
         });

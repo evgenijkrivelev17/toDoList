@@ -6,10 +6,10 @@ var app = express();
 app.set("PORT", process.env.PORT || 4000);
 app.set("URL", "localhost");
 
-Promise.promisifyAll(mongoose);
+
 mongoose.Promise = Promise;
 
-mongoose.createConnection('mongodb://localhost:27017/testproject', { useNewUrlParser: true }).then((v) => {
+mongoose.connect('mongodb://localhost:27017/testproject').then((v) => {
     console.log(`Mongo db is working`);
 }).catch((e) => {
     console.log(` Some error ${e}`);
@@ -43,3 +43,5 @@ app.use((err, req, res) => {
 app.listen(app.get('PORT'), 'localhost', function () {
     console.log(`Server is wroking`);
 });
+
+module.exports = app;

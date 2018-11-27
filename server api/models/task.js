@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var TaskSchema = new mongoose.Schema({
+var TaskSchema = new Schema({
     Id: mongoose.Schema.ObjectId,
     Task: {
         type: String,
@@ -18,6 +19,5 @@ var TaskSchema = new mongoose.Schema({
         default: Date.now
     }
 });
-
 
 module.exports.model = mongoose.model('task', TaskSchema);
