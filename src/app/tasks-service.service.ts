@@ -63,12 +63,12 @@ export class TasksServiceService {
     });
   }
 
-  public UpdateTask(updateTask: Task): Boolean {
+  public UpdateTask(updateTask: Task): any {
     this.http.post(this.url.update, updateTask).subscribe((doc) => {
       const index = this.Tasks.findIndex((v, i, array) => {
         return v.Id === updateTask.Id;
       });
-      if (index != -1) {
+      if (index !== -1) {
         this.Tasks[index] = updateTask;
         return true;
       }
@@ -79,7 +79,7 @@ export class TasksServiceService {
     });
   }
 
-  public DeleteTask(deleteTask: Task): Boolean {
+  public DeleteTask(deleteTask: Task): any {
     this.http.post(this.url.delete, deleteTask).subscribe((doc) => {
       const index = this.Tasks.findIndex((v, i, obj) => {
         return v.Id === deleteTask.Id;
